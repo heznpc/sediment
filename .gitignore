@@ -1,0 +1,35 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Secrets / credentials
+.env
+.env.*
+*secret*
+*credential*
+*api_key*
+*.pem
+*.key
+.mcp.json
+
+# Claude
+.claude/
+
+# Large data (can regenerate)
+*.csv
+
+# Private research & notes
+research/
+TODO.md
