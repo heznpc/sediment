@@ -1,35 +1,56 @@
-# OS
+# Local / Claude
+CLAUDE.md
+TODO.md
+.claude/
+
+# macOS
 .DS_Store
-Thumbs.db
 
 # IDE
 .idea/
-.vscode/
 *.iml
+.vscode/
 
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+*.whl
 .venv/
 venv/
-*.egg-info/
-
-# Secrets / credentials
+env/
 .env
-.env.*
-*secret*
-*credential*
-*api_key*
-*.pem
-*.key
-.mcp.json
 
-# Claude
-.claude/
+# LaTeX artifacts
+paper/main.pdf
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+*-blx.bib
 
-# Large data (can regenerate)
-*.csv
+# Byte-compiled
+*.pyc
+*.pyo
 
-# Private research & notes
-research/
-TODO.md
+# Distribution
+*.tar.gz
+*.zip
