@@ -1,0 +1,52 @@
+name: build-paper
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'paper/**'
+      - '.github/workflows/build-paper.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'paper/**'
+      - '.github/workflows/build-paper.yml'
+  workflow_dispatch:
+
+# Least-privilege: this workflow only reads the source tree and uploads
+# an artifact via the runner's built-in token. No package publishing,
+# no comment-back-to-PR, no release creation here.
+permissions:
+  contents: read
+
+concurrency:
+  group: build-paper-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: latexmk main.tex
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX (latexmk + bibtex via natbib)
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex
+          working_directory: paper
+          # latexmk default already runs the pdflatex -> bibtex -> pdflatex
+          # -> pdflatex cycle that natbib + the new refs.bib pipeline needs.
+          latexmk_use_xelatex: false
+          latexmk_use_lualatex: false
+          continue_on_error: false
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: sediment-${{ github.sha }}
+          path: paper/main.pdf
+          if-no-files-found: error
+          retention-days: 30

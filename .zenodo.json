@@ -17,5 +17,13 @@
   "license": "CC-BY-4.0",
   "upload_type": "publication",
   "publication_type": "preprint",
-  "access_right": "open"
+  "access_right": "open",
+  "version": "0.1.1",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/heznpc/sediment",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
 }
