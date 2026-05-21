@@ -629,6 +629,18 @@ The urgency of this research is amplified by the rapid proliferation of AI tools
 % ============================================================
 % BIBLIOGRAPHY
 % ============================================================
+% Refs live in refs.bib so submissions/<venue>/ can share them without
+% copy-pasting 37 entries each time. Build with:
+%   pdflatex main && bibtex main && pdflatex main && pdflatex main
+% or just `latexmk -pdf main.tex` (preferred; the CI workflow uses it).
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\iffalse
+% --- Original inline bibliography retained for diff-traceability only. ---
+% --- Do NOT edit here; edit refs.bib instead. This block is skipped by ---
+% --- \iffalse...\fi and will be removed in a future commit once refs.bib ---
+% --- is confirmed to compile across our target venues. ---
 \begin{thebibliography}{99}
 
 \bibitem[Alter(2017)]{Alter2017}
@@ -817,5 +829,6 @@ Zimmer, M. (2010).
 \emph{Ethics and Information Technology}, 12(4), 313--325.
 
 \end{thebibliography}
+\fi
 
 \end{document}
