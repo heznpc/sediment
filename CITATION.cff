@@ -1,18 +1,23 @@
 cff-version: 1.2.0
 title: "Sediment: How Streak Mechanics Drive Compelled Production of Low-Quality Digital Content"
 message: "If you cite this concept note, please use the metadata below. A peer-reviewed version may appear later; check the related Zenodo deposit for the canonical citation once minted."
+# Top-level type stays at the CFF 1.2.0 default (software) because the
+# enum is {software, dataset} — no preprint/article slot exists at this
+# level. The `preferred-citation` block below carries the actual
+# article-typed citation that indexers should pick up.
 type: software
 authors:
   - family-names: Yoon
     given-names: Jiyeon
-abstract: >
+abstract: |
   Concept note proposing 'sediment' as a category of human-generated,
   platform-compelled, demand-independent low-quality content, distinct
-  from spam and AI slop. Models the lifecycle as Deposition → Compaction
-  → Fossilization under streak mechanics, develops three competing
-  psychological hypotheses (loss aversion, identity consistency,
-  escalating commitment), and proposes four studies anchored by the
-  GitHub 2016 streak-counter removal as a natural experiment.
+  from spam and AI slop. Models the lifecycle as Deposition then
+  Compaction then Fossilization under streak mechanics, develops three
+  competing psychological hypotheses (loss aversion, identity
+  consistency, escalating commitment), and proposes four studies
+  anchored by the GitHub 2016 streak-counter removal as a natural
+  experiment.
 keywords:
   - streak mechanics
   - gamification
@@ -22,6 +27,26 @@ keywords:
   - digital platforms
   - compelled production
 license: CC-BY-4.0
-version: 0.1.1
+version: 0.1.2
 date-released: 2026-05-21
 repository-code: "https://github.com/heznpc/sediment"
+
+# The canonical citation: the concept-note preprint itself. CFF
+# preferred-citation supports type: article, which downstream indexers
+# (Zotero, Scholar) honor over the top-level type.
+preferred-citation:
+  type: article
+  title: "Sediment: How Streak Mechanics Drive Compelled Production of Low-Quality Digital Content"
+  authors:
+    - family-names: Yoon
+      given-names: Jiyeon
+  year: 2026
+  url: "https://github.com/heznpc/sediment"
+  license: CC-BY-4.0
+  abstract: >
+    Streak mechanics compel users to produce filler content on days when
+    they have nothing meaningful to contribute, simply to avoid losing
+    an accumulated record. This concept note introduces 'sediment' as a
+    category distinct from spam and AI slop, develops a three-stage
+    lifecycle (Deposition, Compaction, Fossilization), and proposes
+    four studies anchored by the GitHub 2016 streak-counter removal.

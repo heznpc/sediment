@@ -1,15 +1,20 @@
 name: build-paper
 
-on:
+# Top-level key quoted as "on" to avoid YAML 1.1 truthy-coercion under
+# strict linters (yamllint default rules, actionlint). GitHub Actions
+# itself is YAML 1.2 and accepts either form.
+"on":
   push:
     branches: [main]
     paths:
       - 'paper/**'
+      - 'submissions/**'
       - '.github/workflows/build-paper.yml'
   pull_request:
     branches: [main]
     paths:
       - 'paper/**'
+      - 'submissions/**'
       - '.github/workflows/build-paper.yml'
   workflow_dispatch:
 
@@ -19,9 +24,12 @@ on:
 permissions:
   contents: read
 
+# Cancel in-progress runs ONLY for pull_request events (cheap to redo on
+# subsequent push). For main-branch pushes, never cancel: the artifact
+# IS the deliverable and we want every commit on main to have its PDF.
 concurrency:
   group: build-paper-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -29,11 +37,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      # SHA-pinned to defeat tag-move attacks (tj-actions/changed-files
+      # Mar-2025 pattern). Dependabot config at .github/dependabot.yml
+      # tracks tag movement and proposes bumps.
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.0
 
       - name: Compile LaTeX (latexmk + bibtex via natbib)
-        uses: xu-cheng/latex-action@v4
+        uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b  # v4.1.0
         with:
           root_file: main.tex
           working_directory: paper
@@ -44,9 +55,13 @@ jobs:
           continue_on_error: false
 
       - name: Upload PDF
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
         with:
-          name: sediment-${{ github.sha }}
+          # On pull_request events github.sha is the synthetic merge-commit
+          # SHA, not the PR head. Use the head SHA when available so the
+          # artifact name matches a commit visible in `git log`. SHAs are
+          # 40-char hex by construction (no injection vector).
+          name: sediment-${{ github.event.pull_request.head.sha || github.sha }}
           path: paper/main.pdf
           if-no-files-found: error
           retention-days: 30
