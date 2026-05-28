@@ -1,0 +1,16 @@
+version: 2
+updates:
+  # Track GitHub Actions tag movement so the SHA pins in
+  # .github/workflows/build-paper.yml are auditable on a schedule.
+  # Without this, the SHA pins silently drift behind upstream releases.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore(ci)
+    groups:
+      actions-minor-patch:
+        update-types: [minor, patch]
