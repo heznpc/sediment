@@ -41,7 +41,7 @@ jobs:
       # Mar-2025 pattern). Dependabot config at .github/dependabot.yml
       # tracks tag movement and proposes bumps.
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v5.0.0
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v5.0.0
 
       - name: Compile LaTeX (latexmk + bibtex via natbib)
         uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b  # v4.1.0
